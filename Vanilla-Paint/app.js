@@ -3,6 +3,8 @@ const ctx = canvas.getContext("2d");
 const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const fill = document.getElementById("jsMode");
+const saveJpgBtn = document.getElementById("jsJpgSave");
+const savePngBtn = document.getElementById("jsPngSave");
 
 const FIRST_COLOR = "#2c2c2c";
 
@@ -37,10 +39,10 @@ function handleRangeChange(event) {
 function handleFillChange(event) {
   if (filling === true) {
     filling = false;
-    fill.innerText = "FILL";
+    fill.innerText = "FILL OFF";
   } else {
     filling = true;
-    fill.innerText = "PAINT";
+    fill.innerText = "FILL ON";
     ctx.fillStyle = ctx.strokeStyle;
   }
 }
@@ -70,6 +72,28 @@ function handleCM(event) {
   event.preventDefault();
 }
 
+function saveName() {
+  const Name = prompt("파일 저장명을 입력해주세요", "");
+  return Name;
+}
+function handleJpgSave(event) {
+  const image = canvas.toDataURL("image/jpeg");
+  const link = document.createElement("a");
+  link.href = image;
+  link.download = saveName();
+  link.click();
+  console.log(link);
+}
+
+function handlePngSave(event) {
+  const image = canvas.toDataURL("image/png");
+  const link = document.createElement("a");
+  link.href = image;
+  link.download = saveName();
+  link.click();
+  console.log(link);
+}
+
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("mousedown", startPainting);
@@ -90,4 +114,12 @@ if (range) {
 
 if (fill) {
   fill.addEventListener("click", handleFillChange);
+}
+
+if (saveJpgBtn) {
+  saveJpgBtn.addEventListener("click", handleJpgSave);
+}
+
+if (savePngBtn) {
+  savePngBtn.addEventListener("click", handlePngSave);
 }
