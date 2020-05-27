@@ -57,13 +57,12 @@ function handleFillCanvas(e) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 }
-
 function handleBrushRange(e) {
   ctx.lineWidth = e.target.value;
 }
 
 function saveName() {
-  const name = prompt("파일 저장명을 입력해주세요.", "");
+  const name = prompt("파일 저장명을 입력해주세요.", "file");
   return name;
 }
 
